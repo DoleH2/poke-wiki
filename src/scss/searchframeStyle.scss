@@ -3,4 +3,14 @@
     background-position: bottom;
     background-size: cover;
     min-height: 250px;
+    .frame-input-search{
+        .btn{
+            border: 0;
+            transform: rotate(360deg);
+            transition: all .3s;
+        }
+        .btn:hover{
+            transform: rotate(-360deg);
+        }
+    }
 }
