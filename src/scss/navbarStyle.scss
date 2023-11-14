@@ -1,0 +1,62 @@
+@import 'variable';
+@import 'animation';
+
+//màn full screen
+
+.navbar-frame {
+    height: 60px;
+    width: 100%;
+
+    .logo-frame {
+        img {
+            object-fit: cover;
+            max-height: 50px;
+
+        }
+    }
+
+    .func-frame {
+        button {
+            color: $title-text !important;
+        }
+
+        button:hover {
+            color: $title-text-hover !important;
+        }
+
+        .func-detail {
+            position: relative;
+
+            .func-btn-detail {
+                width: 100%;
+            }
+        }
+    }
+}
+
+//màn sm
+@media (max-width:768px) {
+    .navbar-frame {
+        .func-frame {
+            .func-detail {
+                width: 100%;
+                height: 100vh;
+                position: fixed;
+                top: 0;
+                left: 0;
+
+                .func-btn-detail {
+                    width: 0%;
+                    opacity: 1;
+                    animation: openOffcanvas .3s forwards;
+                }
+
+                .func-detail-backdrop {
+                    top: 0;
+                    background-color: rgba(51, 51, 51, 0.368);
+                    opacity: 0.5;
+                }
+            }
+        }
+    }
+}
