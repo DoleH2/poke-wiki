@@ -1,0 +1,79 @@
+@import './variable';
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+
+@-webkit-keyframes rotate {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+
+    to {
+        -webkit-transform: rotate(360deg);
+    }
+}
+
+@keyframes rotateReverse {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(-720deg);
+    }
+}
+
+
+@-webkit-keyframes rotateReverse {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+
+    to {
+        -webkit-transform: rotate(-720deg);
+    }
+}
+
+.load {
+    width: 60px;
+    height: 60px;
+    margin: 110px auto 0;
+    border: solid 5px $red-poke-color;
+    border-radius: 50%;
+    border-right-color: transparent;
+    border-bottom-color: transparent;
+
+    -webkit-transition: all 0.5s ease-in;
+    -webkit-animation-name: rotate;
+    -webkit-animation-duration: 1.0s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+
+    transition: all 0.5s ease-in;
+    animation-name: rotate;
+    animation-duration: 1.0s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+
+    img {
+        -webkit-transition: all 0.5s ease-in;
+        -webkit-animation-name: rotateReverse;
+        -webkit-animation-duration: 1.0s;
+        -webkit-animation-iteration-count: infinite;
+        -webkit-animation-timing-function: linear;
+
+        transition: all 0.5s ease-in;
+        animation-name: rotateReverse;
+        animation-duration: 1.0s;
+        animation-iteration-count: infinite;
+        animation-timing-function: linear;
+    }
+}

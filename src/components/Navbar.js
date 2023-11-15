@@ -16,7 +16,7 @@ export const Navbar = () => {
           {/*  */}
           <div
             className="offcanvas offcanvas-top bg-dark d-block d-md-none"
-            tabindex="-1"
+            tabIndex="-1"
             id="offcanvasTop"
             aria-labelledby="offcanvasTopLabel"
           >

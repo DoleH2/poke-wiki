@@ -1,8 +1,12 @@
-.frame-list-pokemon{
+.frame-list-pokemon {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 10px;
-    .frame-card-pokemon{
-        max-width: 300px;
+
+    .frame-card-pokemon {
+        max-width: 400px;
+        min-width: 200px;
+        min-height: 200px;
+
     }
 }

@@ -1,0 +1,1 @@
+export const getDataPokemon = (state) => state.pokemonData;
