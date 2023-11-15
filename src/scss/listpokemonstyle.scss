@@ -1,12 +1,31 @@
+@import './variable';
 .frame-list-pokemon {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 10px;
 
-    .frame-card-pokemon {
-        max-width: 400px;
-        min-width: 200px;
-        min-height: 200px;
-
+    .infinite-scroll-component{
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 10px;
+        overflow: unset !important;
+        .frame-card-pokemon {
+            max-width: 400px;
+            min-width: 200px;
+            min-height: 200px;
+            cursor: pointer;
+        }
+        .frame-card-pokemon:hover{
+            box-shadow: 0px 0px 7px black;
+        }
+    }
+    .btn-scroll-up{
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        border-color: $red-poke-color !important;
+        color: $red-poke-color !important;
+        background-color: $title-text;
+        opacity: 0.5;
+    }
+    .btn-scroll-up:hover{
+        opacity: 1;
     }
 }

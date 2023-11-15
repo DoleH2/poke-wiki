@@ -6,7 +6,9 @@
 .navbar-frame {
     height: 60px;
     width: 100%;
-
+    position: sticky;
+    top: 0;
+    z-index: 2;
     .logo-frame {
         img {
             object-fit: cover;
