@@ -3,10 +3,12 @@ import "../scss/listpokemonstyle.scss";
 import { CardPokemon } from "./CardPokemon";
 import { getRequest } from "../axios/httpRequest";
 import { useDispatch, useSelector } from "react-redux";
-import { changePage, fetchDataPokemon } from "../redux/reducers/dataPokemonSlice";
+import {
+  changePage,
+  fetchDataPokemon,
+} from "../redux/reducers/dataPokemonSlice";
 import { getDataPokemon } from "../redux/selectors/dataPokemonSelector";
 import LoadCircle from "./LoadCircle";
-import InfiniteScroll from "react-infinite-scroll-component";
 import { Pagination } from "./Pagination";
 
 export const ListPokemon = () => {
@@ -19,11 +21,11 @@ export const ListPokemon = () => {
 
   const handleChangePage = (page) => {
     dispatch(changePage(page.selected));
-  }
+  };
+  console.log(dataPokemon.page);
   useEffect(() => {
     fetchData();
   }, [page]);
-
 
   return (
     <>

@@ -1,6 +1,6 @@
 import logo from "./logo.svg";
 import "./App.css";
-import './scss/framerootstyle.scss'
+import "./scss/framerootstyle.scss";
 import { PokeWikiFrame } from "./components/PokeWikiFrame";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
@@ -8,10 +8,10 @@ import {
   BrowserRouter as Router,
   Route,
   Routes,
-  Navigate
+  Navigate,
 } from "react-router-dom";
 import ErrorPage from "./components/utilsComponent/ErrorPage";
-import { PageInfoPokemon } from "./components/PageInfoPokemon";
+import { PageInfoPokemon } from "./components/infoPokemonPage/PageInfoPokemon";
 function App() {
   return (
     <Routes>
