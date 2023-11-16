@@ -1,0 +1,6 @@
+hp highest : 255
+atk highest : 165
+defense : 184
+special atk : 170
+special def : 154
+speed : 200

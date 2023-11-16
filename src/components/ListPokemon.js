@@ -3,51 +3,49 @@ import "../scss/listpokemonstyle.scss";
 import { CardPokemon } from "./CardPokemon";
 import { getRequest } from "../axios/httpRequest";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchDataPokemon } from "../redux/reducers/dataPokemonSlice";
+import { changePage, fetchDataPokemon } from "../redux/reducers/dataPokemonSlice";
 import { getDataPokemon } from "../redux/selectors/dataPokemonSelector";
 import LoadCircle from "./LoadCircle";
 import InfiniteScroll from "react-infinite-scroll-component";
+import { Pagination } from "./Pagination";
 
 export const ListPokemon = () => {
   const dispatch = useDispatch();
-  const [hasMore, setHasMore] = useState(true);
   const dataPokemon = useSelector(getDataPokemon);
-  console.log(dataPokemon);
+  const page = dataPokemon.page;
   const fetchData = useCallback(async () => {
     dispatch(fetchDataPokemon());
   }, []);
 
+  const handleChangePage = (page) => {
+    dispatch(changePage(page.selected));
+  }
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [page]);
 
-  const scrollOnTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
+
   return (
-    <div className="container frame-list-pokemon p-0 py-3">
-      {/* {dataPokemon.status === "loading" ? (
-        <LoadCircle />
-      ) : ( */}
-      <>
-        <InfiniteScroll
-          dataLength={dataPokemon.items.length}
-          next={fetchData}
-          hasMore={hasMore}
-          loader={<LoadCircle />}
-        >
-          {dataPokemon.items.map((pokemon, idx) => (
-            <CardPokemon key={idx} dataPokemon={pokemon} />
-          ))}
-        </InfiniteScroll>
-      </>
-      {/* )} */}
-      <button className="btn btn-scroll-up border" onClick={scrollOnTop}>
-        <i className="fa-solid fa-chevron-up"></i>
-      </button>
-    </div>
+    <>
+      <div className="container frame-list-pokemon p-0">
+        <div className="list-pokemon py-2 px-1">
+          {dataPokemon.status === "loading" ? (
+            <LoadCircle />
+          ) : (
+            <>
+              {dataPokemon.items.map((pokemon, idx) => (
+                <CardPokemon key={idx} dataPokemon={pokemon} />
+              ))}
+            </>
+          )}
+        </div>
+        <div className="frame-paging pt-2">
+          <Pagination
+            maxPage={dataPokemon.totalPage}
+            onChange={handleChangePage}
+          />
+        </div>
+      </div>
+    </>
   );
 };

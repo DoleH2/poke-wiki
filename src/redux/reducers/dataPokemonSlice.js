@@ -1,13 +1,16 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { useEffect } from "react";
 import { getRequest } from "../../axios/httpRequest";
-let urlDataPokemon = "https://pokeapi.co/api/v2/pokemon/?limit=15&offset=0";
+
+
+const limit = 18;
 export const fetchDataPokemon = createAsyncThunk(
   "pokemonData/fetchListPokemon",
-  async () => {
+  async (_, thunkAPI) => {
+    const currPage = thunkAPI.getState().pokemonData.page;
+    let offset = limit * currPage;
+    let urlDataPokemon = "https://pokeapi.co/api/v2/pokemon/?limit=" + limit + "&offset=" + offset;
     const result = await getRequest(urlDataPokemon);
-    console.log(result.data);
-    urlDataPokemon = result.data.next;
     return result.data;
   }
 );
@@ -18,8 +21,14 @@ const pokemonDataSlice = createSlice({
     items: [],
     status: "idle",
     error: null,
+    page: 0,
+    totalPage: 0,
   },
-  reducers: {},
+  reducers: {
+    changePage: (state, action) => {
+      state.page = action.payload;
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchDataPokemon.pending, (state) => {
@@ -31,7 +40,9 @@ const pokemonDataSlice = createSlice({
           action.payload && action.payload.results
             ? action.payload.results
             : [];
-        state.items.push(...newData);
+        console.log(action.payload);
+        state.items = [...newData];
+        state.totalPage = action.payload.count / limit;
       })
       .addCase(fetchDataPokemon.rejected, (state, action) => {
         state.status = "failed";
@@ -41,3 +52,4 @@ const pokemonDataSlice = createSlice({
 });
 
 export default pokemonDataSlice.reducer;
+export const { changePage } = pokemonDataSlice.actions;
