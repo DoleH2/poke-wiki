@@ -36,7 +36,7 @@ export const CardPokemon = memo(({ dataPokemon }) => {
             onClick={() => changeRouter(navigate, '/info', dataPokemonItem.data[dataPokemon.url])}
           >
             <div className="frame-head-card d-flex justify-content-between align-items-center">
-              <div className="frame-name-pokemon text-start">
+              <div className="frame-card-name-pokemon text-start">
                 <p className="m-0">
                   #{dataPokemonItem.data[dataPokemon.url]?.id}
                 </p>

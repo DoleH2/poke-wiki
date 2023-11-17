@@ -8,7 +8,7 @@ export const PageInfoPokemon = () => {
   const dataDefault = location.state;
 
   return (
-    <div className="container-fluid mx-auto position-relative p-0 m-0">
+    <div className="container-fluid mx-auto position-relative p-0 m-0" style={{ minWidth: '300px' }}>
       <Navbar />
       <InfoStatsPokemon dataPokemon={dataDefault} />
       <InfoDetailsPokemon dataPokemon={dataDefault} />

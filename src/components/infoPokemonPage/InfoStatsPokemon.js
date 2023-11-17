@@ -2,6 +2,8 @@ import { formatNumber } from "../../utils/handleNumber";
 import { upperFirst } from "../../utils/handleString";
 import { TagElement } from "../TagElement";
 import LineStats from "../utilsComponent/LineStats";
+import '../../scss/infostatspokemonStyle.scss';
+import { FrameAbility } from "./FrameAbility";
 const maxHP = 260;
 const maxAtk = 170;
 const maxDef = 190;
@@ -17,35 +19,39 @@ export const InfoStatsPokemon = ({ dataPokemon }) => {
     }
   };
   return (
-    <div className="container bg-white mt-2 rounded shadow">
+    <div className="container bg-white mt-2 rounded shadow mx-auto">
       <div className="row">
         <div className="col-12 col-md-6">
-          <div className="frame-info py-4 px-3">
-            <p className="m-0">#{dataPokemon.id}</p>
-            <div className="title-pokemon d-flex justify-content-between align-items-center">
-              <p className="name-pokemon m-0 fs-5 fw-bold">
+          <div className="frame-info py-4 px-3 d-flex flex-column justify-content-center gap-2">
+            <div className="frame-name-pokemon d-flex w-100 justify-content-center align-items-center gap-3">
+              <p className="name-pokemon m-0 fs-2 fw-bold text-center text-white">
                 {upperFirst(dataPokemon.name)}
               </p>
-              <div className="element-pokemon d-flex flex-wrap gap-1">
-                {dataPokemon.types.map((element, idx) => (
-                  <TagElement key={idx} data={element} />
-                ))}
-              </div>
+              <p className="id-pokemon m-0 text-center fs-5 fw-bold">#{dataPokemon.id}</p>
+
+            </div>
+            <div className="element-pokemon d-flex flex-wrap gap-1 justify-content-center">
+              {dataPokemon.types.map((element, idx) => (
+                <TagElement key={idx} data={element} />
+              ))}
             </div>
             <img
+              className="img-pokemon mx-auto"
               src={
                 "https://assets.pokemon.com/assets/cms2/img/pokedex/full/" +
                 formatNumber(dataPokemon.id, 3) +
                 ".png"
               }
               alt="Pokemon"
-              style={{ width: "300px" }}
+              style={{ maxWidth: "300px", width: '100%' }}
               onError={(e) => handleErrorImg(e, dataPokemon)}
             ></img>
+
+            <FrameAbility dataAbility={dataPokemon.abilities} />
           </div>
         </div>
         <div className="col-12 col-md-6">
-          <div className="frame-stats py-4 px-3 d-flex flex-column gap-4">
+          <div className="frame-stats py-5 px-3 d-flex flex-column gap-4">
             <div className="frame-hp">
               <p className="m-0 fw-bold">
                 HP: {dataPokemon.stats[0].base_stat}

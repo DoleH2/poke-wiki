@@ -6,7 +6,7 @@ export const TagElement = ({ data }) => {
     <>
       {
         <div
-          className={`frame-tag-element rounded-pill px-3 py-1 ${data.type.name}`}
+          className={`frame-tag-element rounded-3 px-3 py-1 text-white fw-bold ${data.type.name}`}
         >
           {upperFirst(data.type.name)}
         </div>
