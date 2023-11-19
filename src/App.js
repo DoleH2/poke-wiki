@@ -12,10 +12,14 @@ import {
 } from "react-router-dom";
 import ErrorPage from "./components/utilsComponent/ErrorPage";
 import { PageInfoPokemon } from "./components/infoPokemonPage/PageInfoPokemon";
+import { PokeListFrame } from "./components/PokeListPage";
+import { PokeSearchPage } from "./components/searchPage/PokeSearchPage";
 function App() {
   return (
     <Routes>
-      <Route index path="/" exact element={<PokeWikiFrame />} />
+      <Route path="/" index exact element={<PokeWikiFrame />} />
+      <Route path="/pokemon/:page" exact element={<PokeListFrame />} />
+      <Route path="/search-pokemon" exact element={<PokeSearchPage />} />
       <Route path="/info" exact element={<PageInfoPokemon />} />
       <Route path="/error" exact element={<ErrorPage></ErrorPage>} />
       <Route path="*" element={<Navigate to="/error" />} />

@@ -5,7 +5,7 @@ export const Navbar = () => {
   let navigate = useNavigate();
   const changeRouter = (path, data) => {
     navigate(path, { state: data });
-  }
+  };
   return (
     <nav className="navbar-frame bg-dark d-flex align-items-center">
       <div className="container d-flex align-items-center justify-content-between gap-3 p-0">
@@ -15,10 +15,24 @@ export const Navbar = () => {
         <div className="func-frame d-flex align-items-center position-relative">
           {/*  */}
           <div className="func-detail d-none d-md-flex bg-dark">
-            <button className="btn d-block mx-auto"
-              onClick={() => changeRouter("/")}>Home</button>
-            <button className="btn d-block mx-auto"
-              onClick={() => changeRouter("/compare")}>Compare</button>
+            <button
+              className="btn d-block mx-auto"
+              onClick={() => changeRouter("/")}
+            >
+              Home
+            </button>
+            <button
+              className="btn d-block mx-auto"
+              onClick={() => changeRouter("/pokemon/1")}
+            >
+              List
+            </button>
+            <button
+              className="btn d-block mx-auto"
+              onClick={() => changeRouter("/compare")}
+            >
+              Compare
+            </button>
           </div>
           {/*  */}
           <div
@@ -39,10 +53,24 @@ export const Navbar = () => {
               ></button>
             </div>
             <div className="offcanvas-body">
-              <button className="btn d-block mx-auto"
-                onClick={() => changeRouter("/")}>Home</button>
-              <button className="btn d-block mx-auto"
-                onClick={() => changeRouter("/compare")}>Compare</button>
+              <button
+                className="btn d-block mx-auto"
+                onClick={() => changeRouter("/")}
+              >
+                Home
+              </button>
+              <button
+                className="btn d-block mx-auto"
+                onClick={() => changeRouter("/pokemon/1")}
+              >
+                List
+              </button>
+              <button
+                className="btn d-block mx-auto"
+                onClick={() => changeRouter("/compare")}
+              >
+                Compare
+              </button>
             </div>
           </div>
           <button

@@ -1,3 +1,5 @@
 export const getDataPokemon = (state) => state.pokemonData;
 
-export const getPagePokemon = (state) => state.pokemonData.page;
+export const getAllDataPokemon = (state) => state.pokemonData.allData;
+
+export const getSearchNamePokemon = (state) => state.pokemonData.search;

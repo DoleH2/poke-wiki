@@ -1,54 +1,32 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { useEffect } from "react";
-import { getRequest } from "../../axios/httpRequest";
-
-const limit = 18;
-export const fetchDataPokemon = createAsyncThunk(
-  "pokemonData/fetchListPokemon",
-  async (_, thunkAPI) => {
-    const currPage = thunkAPI.getState().pokemonData.page;
-    let offset = limit * currPage;
-    let urlDataPokemon =
-      "https://pokeapi.co/api/v2/pokemon/?limit=" + limit + "&offset=" + offset;
-    const result = await getRequest(urlDataPokemon);
-    return result.data;
-  }
-);
+import { createSlice } from "@reduxjs/toolkit";
 
 const pokemonDataSlice = createSlice({
   name: "pokemonData",
   initialState: {
-    items: [],
-    status: "idle",
-    error: null,
-    page: 0,
-    totalPage: 0,
+    allData: {},
+    filterData: [],
+    search: "",
   },
   reducers: {
-    changePage: (state, action) => {
-      state.page = action.payload;
+    setAllData: (state, action) => {
+      state.allData = action.payload;
     },
-  },
-  extraReducers: (builder) => {
-    builder
-      .addCase(fetchDataPokemon.pending, (state) => {
-        state.status = "loading";
-      })
-      .addCase(fetchDataPokemon.fulfilled, (state, action) => {
-        state.status = "succeeded";
-        const newData =
-          action.payload && action.payload.results
-            ? action.payload.results
-            : [];
-        state.items = [...newData];
-        state.totalPage = action.payload.count / limit;
-      })
-      .addCase(fetchDataPokemon.rejected, (state, action) => {
-        state.status = "failed";
-        state.error = action.error.message;
-      });
+    filterNamePokemon: (state) => {
+      const listData = state.allData.results;
+      console.log(state.allData);
+      console.log(listData);
+      if (listData.results) {
+        state.filterData = listData.results.filter((item) =>
+          item.name.includes(state.search.toLowerCase())
+        );
+      }
+    },
+    setSearchName: (state, action) => {
+      state.search = action.payload;
+    },
   },
 });
 
 export default pokemonDataSlice.reducer;
-export const { changePage } = pokemonDataSlice.actions;
+export const { filterNamePokemon, setAllData, setSearchName } =
+  pokemonDataSlice.actions;

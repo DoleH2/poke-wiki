@@ -1,51 +1,57 @@
-import { memo, useCallback, useEffect, useState } from "react";
+import { Suspense, lazy, memo, useCallback, useEffect, useState } from "react";
 import "../scss/listpokemonstyle.scss";
-import { CardPokemon } from "./CardPokemon";
-import { getRequest } from "../axios/httpRequest";
-import { useDispatch, useSelector } from "react-redux";
-import {
-  changePage,
-  fetchDataPokemon,
-} from "../redux/reducers/dataPokemonSlice";
-import { getDataPokemon } from "../redux/selectors/dataPokemonSelector";
 import LoadCircle from "./LoadCircle";
 import { Pagination } from "./Pagination";
+import { useGetListPokemonQuery } from "../redux/reducers/apiFetch";
+import { useNavigate, useParams } from "react-router-dom";
+const CardPokemon = lazy(() => import("./CardPokemon"));
+
+const limit = 18;
 
 export const ListPokemon = () => {
-  const dispatch = useDispatch();
-  const dataPokemon = useSelector(getDataPokemon);
-  const page = dataPokemon.page;
-  const fetchData = useCallback(async () => {
-    dispatch(fetchDataPokemon());
-  }, []);
-
-  const handleChangePage = (page) => {
-    dispatch(changePage(page.selected));
+  let navigate = useNavigate();
+  const changeRouter = (path, data) => {
+    navigate(path, { state: data });
   };
-  console.log(dataPokemon.page);
+
+  const { page } = useParams();
+  console.log(page);
+  const handleChangePage = (page) => {
+    changeRouter("/pokemon/" + (Number(page.selected) + 1));
+  };
+  const { data, error, status, refetch } = useGetListPokemonQuery({
+    limit: limit,
+    offset: (page - 1) * limit,
+  });
+  console.log(data);
   useEffect(() => {
-    fetchData();
+    refetch();
   }, [page]);
 
   return (
     <>
       <div className="container frame-list-pokemon p-0">
         <div className="list-pokemon py-2 px-1">
-          {dataPokemon.status === "loading" ? (
+          {status === "pending" ? (
             <LoadCircle />
           ) : (
             <>
-              {dataPokemon.items.map((pokemon, idx) => (
-                <CardPokemon key={idx} dataPokemon={pokemon} />
+              {data.results.map((pokemon, idx) => (
+                <Suspense key={idx} fallback={<LoadCircle />}>
+                  <CardPokemon dataPokemon={pokemon} />
+                </Suspense>
               ))}
             </>
           )}
         </div>
         <div className="frame-paging pt-2">
-          <Pagination
-            maxPage={dataPokemon.totalPage}
-            onChange={handleChangePage}
-          />
+          {status !== "pending" && (
+            <Pagination
+              curPage={page}
+              maxPage={Math.ceil(data.count / limit)}
+              onChange={handleChangePage}
+            />
+          )}
         </div>
       </div>
     </>

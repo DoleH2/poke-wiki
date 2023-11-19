@@ -1,6 +1,5 @@
 import "../../scss/linestatsstyle.scss";
 const LineStats = ({ lineColor, trackLineColor, percent }) => {
-  console.log(percent);
   return (
     <div
       className="frame-line-stats"

@@ -1,28 +1,53 @@
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { getRequest } from "../../axios/httpRequest";
+import Modal from "react-bootstrap/Modal";
+import { upperFirst } from "../../utils/handleString";
+import { useGetDetailPokemonQuery } from "../../redux/reducers/apiFetch";
+import LoadCircle from "../LoadCircle";
+const DetailAbility = ({ show, handleClose, ...props }) => {
+  const [stateDetail, setStateDetail] = useState("");
 
-const DetailAbility = ({ api }) => {
-    const [stateDetail, setStateDetail] = useState('');
-    const fetchApi = async () => {
-        console.log(api);
-        const result = await getRequest(api);
-        console.log(result);
-        setStateDetail(result.data.effect_entries[0].effect);
+  const { data, error, status, isLoading } = useGetDetailPokemonQuery({
+    api: show,
+  });
+  const convertData = () => {
+    let ability = {};
+    ability.name = upperFirst(data.name);
+    ability.descript = data.effect_entries.find(
+      (descript) => descript.language.name === "en"
+    ).effect;
+    setStateDetail(ability);
+  };
+  useEffect(() => {
+    if (status === "fulfilled" && show !== "") {
+      convertData();
     }
-    useEffect(() => {
-        fetchApi();
-    }, [api])
-    return (
+  }, [data]);
+  return (
+    <Modal
+      {...props}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+      show={show !== "" ? true : false}
+      onHide={handleClose}
+    >
+      {show !== "" && status === "pending" ? (
+        <LoadCircle />
+      ) : (
         <>
-            {stateDetail !== '' &&
-                (<div className="frame-detail-ability d-flex flex-column p-2">
-                    <button className="btn-close ms-auto"
-                        onClick={() => setStateDetail('')}></button>
-                    <p className="m-0">{stateDetail !== '' && stateDetail}</p>
-                </div>)}
+          <Modal.Header closeButton>
+            <Modal.Title id="contained-modal-title-vcenter">
+              {!data ? <LoadCircle /> : stateDetail.name}
+            </Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            {!data ? <LoadCircle /> : <p>{stateDetail.descript}</p>}
+          </Modal.Body>
         </>
-
-    )
-}
+      )}
+    </Modal>
+  );
+};
 
 export default DetailAbility;
