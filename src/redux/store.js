@@ -9,5 +9,8 @@ export const store = configureStore({
     pokemonItemData: dataPokemonItemSlice,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(apiFetch.middleware),
+    getDefaultMiddleware({
+      immutableCheck: { warnAfter: 200 },
+      serializableCheck: { warnAfter: 200 }
+    }).concat(apiFetch.middleware),
 });

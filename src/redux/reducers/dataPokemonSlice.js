@@ -3,23 +3,21 @@ import { createSlice } from "@reduxjs/toolkit";
 const pokemonDataSlice = createSlice({
   name: "pokemonData",
   initialState: {
-    allData: {},
     filterData: [],
     search: "",
+    pageSearch: 0
   },
   reducers: {
     setAllData: (state, action) => {
       state.allData = action.payload;
     },
-    filterNamePokemon: (state) => {
-      const listData = state.allData.results;
-      console.log(state.allData);
-      console.log(listData);
-      if (listData.results) {
-        state.filterData = listData.results.filter((item) =>
-          item.name.includes(state.search.toLowerCase())
-        );
-      }
+    filterNamePokemon: (state, action) => {
+      const listData = action.payload.list;
+
+      state.filterData = listData.filter((item) =>
+        item.name.includes(state.search.toLowerCase())
+      );
+
     },
     setSearchName: (state, action) => {
       state.search = action.payload;

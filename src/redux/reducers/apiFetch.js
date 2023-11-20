@@ -9,15 +9,21 @@ const apiFetch = createApi({
       query: ({ limit, offset }) => ({
         url: `https://pokeapi.co/api/v2/pokemon/?limit=${limit}&offset=${offset}`,
       }),
-      keepUnusedDataFor: 5 * 60 * 1000,
+      keepUnusedDataFor: 2 * 60 * 1000,
     }),
     getDetailPokemon: build.query({
       query: ({ api }) => ({
         url: api,
       }),
-      keepUnusedDataFor: 2 * 60 * 100,
+      keepUnusedDataFor: 1 * 60 * 1000,
     }),
+    getListPokemonMain: build.query({
+      query: ({ limit, offset }) => ({
+        url: `https://pokeapi.co/api/v2/pokemon/?limit=${limit}&offset=${offset}`,
+      }),
+      keepUnusedDataFor: Infinity
+    })
   }),
 });
 export default apiFetch;
-export const { useGetListPokemonQuery, useGetDetailPokemonQuery } = apiFetch;
+export const { useGetListPokemonQuery, useGetDetailPokemonQuery, useGetListPokemonMainQuery } = apiFetch;

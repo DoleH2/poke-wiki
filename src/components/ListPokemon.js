@@ -5,6 +5,7 @@ import { Pagination } from "./Pagination";
 import { useGetListPokemonQuery } from "../redux/reducers/apiFetch";
 import { useNavigate, useParams } from "react-router-dom";
 const CardPokemon = lazy(() => import("./CardPokemon"));
+// import CardPokemon from "./CardPokemon";
 
 const limit = 18;
 
@@ -37,9 +38,11 @@ export const ListPokemon = () => {
           ) : (
             <>
               {data.results.map((pokemon, idx) => (
+
                 <Suspense key={idx} fallback={<LoadCircle />}>
                   <CardPokemon dataPokemon={pokemon} />
                 </Suspense>
+
               ))}
             </>
           )}
