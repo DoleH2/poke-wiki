@@ -1,10 +1,9 @@
 import { Suspense, lazy, useState } from "react";
 import { upperFirst } from "../../utils/handleString";
 import "../../scss/frameabilityStyle.scss";
-import LoadCircle from "../LoadCircle";
+import LoadCircle from "../utilsComponent/LoadCircle";
 import Button from "react-bootstrap/Button";
 const DetailAbility = lazy(() => import("./DetailAbility"));
-// import DetailAbility from "./DetailAbility";
 const FrameAbility = ({ dataAbility }) => {
   const [openDetail, setOpenDetail] = useState("");
 

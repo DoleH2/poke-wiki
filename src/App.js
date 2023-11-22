@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 import "./scss/framerootstyle.scss";
 import { PokeWikiFrame } from "./components/PokeWikiFrame";
@@ -12,15 +11,15 @@ import {
 } from "react-router-dom";
 import ErrorPage from "./components/utilsComponent/ErrorPage";
 import { PageInfoPokemon } from "./components/infoPokemonPage/PageInfoPokemon";
-import { PokeListFrame } from "./components/PokeListPage";
-import { PokeSearchPage } from "./components/searchPage/PokeSearchPage";
+import { PokeListFrame } from "./components/listPokemonPage/PokeListPage";
+import PageComparePokemon from "./components/comparePokemonPage/PageComparePokemon";
 function App() {
   return (
     <Routes>
       <Route path="/" index exact element={<PokeWikiFrame />} />
       <Route path="/pokemon/:page" exact element={<PokeListFrame />} />
-      <Route path="/search-pokemon" exact element={<PokeSearchPage />} />
       <Route path="/info" exact element={<PageInfoPokemon />} />
+      <Route path="/compare" exact element={<PageComparePokemon />} />
       <Route path="/error" exact element={<ErrorPage></ErrorPage>} />
       <Route path="*" element={<Navigate to="/error" />} />
     </Routes>

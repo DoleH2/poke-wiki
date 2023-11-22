@@ -1,24 +1,19 @@
 import { Suspense, lazy, memo, useCallback, useEffect, useState } from "react";
-import "../scss/listpokemonstyle.scss";
-import LoadCircle from "./LoadCircle";
-import { Pagination } from "./Pagination";
-import { useGetListPokemonQuery } from "../redux/reducers/apiFetch";
+import '../../scss/listpokemonstyle.scss';
+import LoadCircle from "../utilsComponent/LoadCircle";
+import { Pagination } from "../utilsComponent/Pagination";
+import { useGetListPokemonQuery } from "../../redux/reducers/apiFetch";
 import { useNavigate, useParams } from "react-router-dom";
+import { changeRouter } from "../../utils/handleRouter";
 const CardPokemon = lazy(() => import("./CardPokemon"));
-// import CardPokemon from "./CardPokemon";
 
 const limit = 18;
 
 export const ListPokemon = () => {
   let navigate = useNavigate();
-  const changeRouter = (path, data) => {
-    navigate(path, { state: data });
-  };
-
   const { page } = useParams();
-  console.log(page);
   const handleChangePage = (page) => {
-    changeRouter("/pokemon/" + (Number(page.selected) + 1));
+    changeRouter(navigate, "/pokemon/" + (Number(page.selected) + 1));
   };
   const { data, error, status, refetch } = useGetListPokemonQuery({
     limit: limit,

@@ -1,13 +1,12 @@
-import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import Modal from "react-bootstrap/Modal";
 import { upperFirst } from "../../utils/handleString";
 import { useGetDetailPokemonQuery } from "../../redux/reducers/apiFetch";
-import LoadCircle from "../LoadCircle";
+import LoadCircle from "../utilsComponent/LoadCircle";
 const DetailAbility = ({ show, handleClose, ...props }) => {
   const [stateDetail, setStateDetail] = useState("");
 
-  const { data, error, status, isLoading } = useGetDetailPokemonQuery({
+  const { data, status } = useGetDetailPokemonQuery({
     api: show,
   });
   const convertData = () => {

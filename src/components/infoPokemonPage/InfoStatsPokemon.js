@@ -2,7 +2,7 @@ import FrameLineStatsPokemon from "./FrameLineStatsPokemon";
 import { Suspense, lazy } from "react";
 import { formatNumber } from "../../utils/handleNumber";
 import { upperFirst } from "../../utils/handleString";
-import { TagElement } from "../TagElement";
+import { TagElement } from '../utilsComponent/TagElement';
 import "../../scss/infostatspokemonStyle.scss";
 import FrameAbility from "./FrameAbility";
 

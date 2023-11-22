@@ -1,10 +1,10 @@
-import LoadCircle from "./LoadCircle";
-import { formatNumber } from "../utils/handleNumber";
-import { upperFirst } from "../utils/handleString";
-import { TagElement } from "./TagElement";
-import { changeRouter } from "../utils/handleRouter";
+import LoadCircle from "../utilsComponent/LoadCircle";
+import { formatNumber } from "../../utils/handleNumber";
+import { upperFirst } from "../../utils/handleString";
+import { TagElement } from "../utilsComponent/TagElement";
+import { changeRouter } from "../../utils/handleRouter";
 import { useNavigate } from "react-router-dom";
-import { useGetDetailPokemonQuery } from "../redux/reducers/apiFetch";
+import { useGetDetailPokemonQuery } from "../../redux/reducers/apiFetch";
 import { useEffect, useState } from "react";
 
 const CardPokemon = ({ dataPokemon }) => {
@@ -13,11 +13,7 @@ const CardPokemon = ({ dataPokemon }) => {
     api: dataPokemon.url,
   });
   const navigate = useNavigate();
-  const handleErrorImg = (e, data) => {
-    if (data.sprites.front_default !== null) {
-      e.target.src = data.sprites.front_default;
-    }
-  };
+
   const handleLoadImg = () => {
     setLoadImage(true);
   };
@@ -49,7 +45,6 @@ const CardPokemon = ({ dataPokemon }) => {
                 alt="Pokemon"
                 className="w-100"
                 onLoad={handleLoadImg}
-                onError={(e) => handleErrorImg(e, data)}
               ></img>
               {!loadImage && <LoadCircle />}
             </div>

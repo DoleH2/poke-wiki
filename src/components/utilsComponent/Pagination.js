@@ -1,7 +1,5 @@
 import ReactPaginate from "react-paginate";
-import "../scss/pagingstyle.scss";
-import { useSelector } from "react-redux";
-import { getPagePokemon } from "../redux/selectors/dataPokemonSelector";
+import "../../scss/pagingstyle.scss";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 export const Pagination = ({ maxPage, onChange, curPage }) => {
@@ -19,7 +17,6 @@ export const Pagination = ({ maxPage, onChange, curPage }) => {
       !Number.isInteger(Number(curPage)) ||
       curPage < 1
     ) {
-      console.log("vao");
       changeRouter("/error");
     }
   }, []);

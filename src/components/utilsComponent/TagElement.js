@@ -1,5 +1,5 @@
-import { upperFirst } from "../utils/handleString";
-import "../scss/tagelementstyle.scss";
+import { upperFirst } from "../../utils/handleString";
+import "../../scss/tagelementstyle.scss";
 
 export const TagElement = ({ data }) => {
   return (

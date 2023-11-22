@@ -1,5 +1,5 @@
-import "../scss/navbarStyle.scss";
-import logoPokemon from "../img/logo-pokemon.png";
+import "../../scss/navbarStyle.scss";
+import logoPokemon from "../../img/logo-pokemon.png";
 import { useNavigate } from "react-router-dom";
 export const Navbar = () => {
   let navigate = useNavigate();
@@ -52,7 +52,7 @@ export const Navbar = () => {
                 aria-label="Close"
               ></button>
             </div>
-            <div className="offcanvas-body">
+            <div className="offcanvas-body bg-dark">
               <button
                 className="btn d-block mx-auto"
                 onClick={() => changeRouter("/")}

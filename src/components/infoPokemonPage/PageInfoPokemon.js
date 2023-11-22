@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from "react-router-dom";
-import { Navbar } from "../Navbar";
+import { Navbar } from '../utilsComponent/Navbar';
 import { InfoStatsPokemon } from "./InfoStatsPokemon";
 
 export const PageInfoPokemon = () => {

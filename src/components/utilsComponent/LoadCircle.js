@@ -1,5 +1,5 @@
-import '../scss/loadcirclestyle.scss';
-import imgPokemon from '../img/btn-search.png';
+import '../../scss/loadcirclestyle.scss';
+import imgPokemon from '../../img/btn-search.png';
 const LoadCircle = () => {
     return (
         <div className='frame-loading d-flex align-items-center justify-content-center w-100 h-100'>

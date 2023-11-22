@@ -4,8 +4,7 @@ const pokemonDataSlice = createSlice({
   name: "pokemonData",
   initialState: {
     filterData: [],
-    search: "",
-    pageSearch: 0
+    search: ""
   },
   reducers: {
     setAllData: (state, action) => {
@@ -13,10 +12,14 @@ const pokemonDataSlice = createSlice({
     },
     filterNamePokemon: (state, action) => {
       const listData = action.payload.list;
-
-      state.filterData = listData.filter((item) =>
+      if (state.search === "") {
+        state.filterData = [];
+        return
+      }
+      const listSearch = listData.filter((item) =>
         item.name.includes(state.search.toLowerCase())
       );
+      state.filterData = listSearch.slice(0, 5);
 
     },
     setSearchName: (state, action) => {
