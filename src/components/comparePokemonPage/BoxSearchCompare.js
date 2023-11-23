@@ -1,17 +1,20 @@
-import { useCallback, useMemo, useState } from "react";
-import SearchPokemon from "../listPokemonPage/SearchPokemon";
+import { Suspense, lazy, useCallback, useMemo, useState } from "react";
 import { useGetListPokemonMainQuery } from "../../redux/reducers/apiFetch";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
-import OptionCompare from "./OptionCompare";
+import { useForm } from 'react-hook-form';
+import InfoPokemonCompare from "./InfoPokemonCompare";
+const OptionCompare = lazy(() => import('./OptionCompare'));
 
-const BoxSearchCompare = () => {
-  //modal
+const BoxSearchCompare = ({ active }) => {
+  const { register } = useForm();
   const [show, setShow] = useState(false);
-
-  const handleClose = () => setShow(false);
+  const handleClose = () => {
+    setShow(false)
+  };
+  const [toggleChoose, setToggleChoose] = useState(false);
   const handleShow = () => setShow(true);
-  //end modal
+  const [choosePokemonState, setChoosePokemonState] = useState();
   const [filterData, setFilterData] = useState([]);
   const { data, error, status } = useGetListPokemonMainQuery({
     limit: 2000,
@@ -39,28 +42,57 @@ const BoxSearchCompare = () => {
       }
     }, 1000);
   };
+  const handleClickChoosePokemon = useCallback((data) => {
+    console.log(data);
+    handleClose();
+    setChoosePokemonState(data);
+    if (!toggleChoose) {
+      console.log(toggleChoose);
+      setToggleChoose(true);
+      active(true);
+    } else {
+      console.log('vao neeee');
+      active(false);
+    }
+  }, [toggleChoose])
   return (
     <div className="frame-pokemon-select">
-      <Button
-        onClick={handleShow}
-        className="btn btn-light border"
-        style={{ width: "300px", height: "300px" }}
-      >
-        <i class="fa-solid fa-plus fs-1 text-secondary"></i>
-      </Button>
+      {
+        choosePokemonState ?
+          (<InfoPokemonCompare dataPokemon={choosePokemonState} onClickEdit={handleShow} />) :
+          (
+            <Button
+              onClick={handleShow}
+              className="btn btn-light border"
+              style={{ width: "200px", height: "200px" }}
+            >
+              <i className="fa-solid fa-plus fs-1 text-secondary"></i>
+              <p>Choose Pokemon</p>
+            </Button>
+          )
+      }
+
+
+
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Search Pokemon</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <div className="frame-search-compare">
-            <input
+            <input autoComplete="off"
               className="form-control"
-              onChange={(e) => handleChangeSearch(e.target.value)}
+              {...register("input-search-compare", {
+                onChange: (e) => handleChangeSearch(e.target.value)
+              })}
             />
             <div className="display-pokemon-search-compare">
-              {filterData.map((item) => (
-                <OptionCompare dataPokemon={item} />
+              {filterData.map((item, idx) => (
+                <Suspense key={idx}>
+                  <OptionCompare dataPokemon={item}
+                    onClick={(data) => handleClickChoosePokemon(data, true)}
+                  />
+                </Suspense>
               ))}
             </div>
           </div>

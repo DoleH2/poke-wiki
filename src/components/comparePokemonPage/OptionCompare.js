@@ -8,13 +8,17 @@ const OptionCompare = ({ dataPokemon, onClick }) => {
   const { data, error, status } = useGetDetailPokemonQuery({
     api: dataPokemon.url,
   });
+
+  const handleOnClick = () => {
+    onClick(data);
+  }
   return (
     <>
       {status === "fulfilled" ? (
         <div
           className="frame-option-search d-flex align-items-center"
           style={{ cursor: "pointer" }}
-          onClick={() => onClick(data)}
+          onClick={handleOnClick}
         >
           <img
             src={data.sprites.front_default}

@@ -5,6 +5,8 @@ import { upperFirst } from "../../utils/handleString";
 import { TagElement } from '../utilsComponent/TagElement';
 import "../../scss/infostatspokemonStyle.scss";
 import FrameAbility from "./FrameAbility";
+import FrameTypes from "./FrameTypes";
+import FrameHeiWei from "./FrameHeiWei";
 
 export const InfoStatsPokemon = ({ dataPokemon }) => {
   console.log(dataPokemon);
@@ -22,11 +24,7 @@ export const InfoStatsPokemon = ({ dataPokemon }) => {
                 #{dataPokemon.id}
               </p>
             </div>
-            <div className="element-pokemon d-flex flex-wrap gap-1 justify-content-center">
-              {dataPokemon.types.map((element, idx) => (
-                <TagElement key={idx} data={element} />
-              ))}
-            </div>
+            <FrameTypes listType={dataPokemon.types} />
             <img
               className="img-pokemon mx-auto"
               src={dataPokemon.sprites.front_default}
@@ -36,16 +34,9 @@ export const InfoStatsPokemon = ({ dataPokemon }) => {
             <FrameAbility dataAbility={dataPokemon.abilities} />
           </div>
         </div>
-        <div className="col-12 col-md-6">
+        <div className="col-12 col-md-6 pt-5">
           <FrameLineStatsPokemon dataStats={dataPokemon.stats} />
-          <div className="d-flex flex-wrap px-2 gap-5 justify-content-center">
-            <p className="m-0 fw-bold" style={{ minWidth: "100px" }}>
-              Height: {dataPokemon.height * 10} cm
-            </p>
-            <p className="m-0 fw-bold" style={{ minWidth: "100px" }}>
-              Weight: {dataPokemon.weight / 10} kg
-            </p>
-          </div>
+          <FrameHeiWei dataPokemon={dataPokemon} />
         </div>
       </div>
     </div>

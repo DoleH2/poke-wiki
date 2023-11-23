@@ -4,7 +4,7 @@ import "../../scss/frameabilityStyle.scss";
 import LoadCircle from "../utilsComponent/LoadCircle";
 import Button from "react-bootstrap/Button";
 const DetailAbility = lazy(() => import("./DetailAbility"));
-const FrameAbility = ({ dataAbility }) => {
+const FrameAbility = ({ dataAbility, ...rest }) => {
   const [openDetail, setOpenDetail] = useState("");
 
   const handleClickAbility = (api) => {
@@ -14,7 +14,7 @@ const FrameAbility = ({ dataAbility }) => {
     setOpenDetail("");
   };
   return (
-    <div className="frame-ability rounded d-flex align-items-center gap-2 justify-content-center">
+    <div className="frame-ability rounded d-flex align-items-center gap-2 justify-content-center mx-1" {...rest}>
       {dataAbility.map((ability, idx) => (
         <Button
           key={idx}

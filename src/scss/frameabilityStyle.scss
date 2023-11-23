@@ -12,8 +12,7 @@
 
     .frame-box-ability:hover {
         box-shadow: 0px 0px 7px 2px $title-text;
-        transform: scale(1.01);
-        font-weight: bold;
+        background-color: $text-color;
     }
 
     .frame-box-ability:active {

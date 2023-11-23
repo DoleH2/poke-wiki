@@ -2,14 +2,16 @@
     background-image: url('../img/bg-pokemon-2.jpg');
     background-position: bottom;
     background-size: cover;
-    min-height: 250px;
-    .frame-input-search{
-        .btn{
+    min-height: 200px;
+
+    .frame-input-search {
+        .btn {
             border: 0;
             transform: rotate(360deg);
             transition: all .3s;
         }
-        .btn:hover{
+
+        .btn:hover {
             transform: rotate(-360deg);
         }
     }

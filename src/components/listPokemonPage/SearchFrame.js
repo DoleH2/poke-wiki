@@ -35,7 +35,7 @@ export const SearchFrame = () => {
         <img
           className="d-none d-md-block"
           src={pikachu}
-          style={{ width: "200px" }}
+          style={{ width: "180px" }}
         ></img>
         <SearchPokemon
           onChange={(value) => handleChangeSearch(value)}

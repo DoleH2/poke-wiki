@@ -31,11 +31,11 @@ const CardPokemon = ({ dataPokemon }) => {
             <div
               className={`frame-head-card d-flex justify-content-between align-items-center`}
             >
-              <div className="frame-card-name-pokemon text-start">
-                <p className="m-0">#{data.id}</p>
+              <div className="frame-card-name-pokemon text-start d-flex align-items-center gap-1">
                 <p className="name-pokemon m-0 fs-5 fw-bold">
                   {data.name && upperFirst(data.name)}
                 </p>
+                <p className="m-0">#{data.id}</p>
               </div>
               <div className="frame-element-pokemon"></div>
             </div>

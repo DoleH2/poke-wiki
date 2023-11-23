@@ -6,9 +6,9 @@ const maxSAtk = 195;
 const maxSDef = 230;
 const maxSpd = 200;
 
-const FrameLineStatsPokemon = ({ dataStats, level }) => {
+const FrameLineStatsPokemon = ({ dataStats, level, ...rest }) => {
   return (
-    <div className="frame-stats py-5 px-3 d-flex flex-column gap-4">
+    <div {...rest} className="frame-stats p-3 d-flex flex-column gap-4">
       <div className="frame-hp">
         <p className="m-0 fw-bold">HP: {dataStats[0].base_stat} / {Math.floor(0.01 * (2 * dataStats[0].base_stat + 31) * 100) + 100 + 10}(Max Level)</p>
         <LineStats
