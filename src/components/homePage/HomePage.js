@@ -1,6 +1,6 @@
 import ButtonFunc from "./ButtonFunc";
 import '../../scss/homepageStyle.scss';
-// import SendMessage from "../../apiFacebook/SendMessage";
+import SendMessage from "../../apiFacebook/SendMessage";
 const HomePage = () => {
     return (
         <div className="container frame-home-page d-flex flex-wrap justify-content-center p-3 gap-2"
