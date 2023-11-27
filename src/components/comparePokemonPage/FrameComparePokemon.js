@@ -5,6 +5,7 @@ const FrameComparePokemon = () => {
   const [adBox, setAdBox] = useState(1);
 
   const handleActive = useCallback((kq) => {
+    console.log(adBox);
     if (kq && adBox < 5) {
       setAdBox((adBox) => adBox + 1);
     }
