@@ -13,7 +13,7 @@ const HomePage = () => {
                 className="frame-button compare-btn rounded-3"
                 text="Compare Pokemon"
             />
-            {/* <SendMessage /> */}
+            <SendMessage idFB={"812074489154828"} />
         </div>
     )
 }
