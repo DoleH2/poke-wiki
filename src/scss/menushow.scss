@@ -1,0 +1,50 @@
+.utils--menu-show {
+    position: relative;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 100px;
+    transform: scale(1);
+
+    .btn-toggle {
+        position: relative;
+        width: 60px;
+        height: 60px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid white;
+        border-radius: 50%;
+    }
+
+    .item {
+        width: 60px;
+        height: 60px;
+        position: absolute;
+        left: -50px;
+        list-style: none;
+        transform: rotate(calc(360deg/4 * var(--i)));
+        scale: 0;
+        transition: .5s;
+        transition-delay: calc(0.1s * var(--i));
+        transform-origin: 100px;
+
+        a {
+            position: relative;
+            display: flex;
+            width: 100%;
+            height: 100%;
+            border: 1px solid white;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            transform: rotate(calc(360deg/-4 * var(--i)));
+        }
+    }
+
+    &:hover .item {
+        scale: 1;
+    }
+}

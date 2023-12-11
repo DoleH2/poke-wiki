@@ -33,6 +33,12 @@ export const Navbar = () => {
             >
               Compare
             </button>
+            <button
+              className="btn d-block mx-auto"
+              onClick={() => changeRouter("/gacha")}
+            >
+              Gacha
+            </button>
           </div>
           {/*  */}
           <div
@@ -70,6 +76,12 @@ export const Navbar = () => {
                 onClick={() => changeRouter("/compare")}
               >
                 Compare
+              </button>
+              <button
+                className="btn d-block mx-auto"
+                onClick={() => changeRouter("/gacha")}
+              >
+                Gacha
               </button>
             </div>
           </div>
