@@ -1,0 +1,22 @@
+@import url('./_animation.scss');
+.frame-gacha-pokemon{
+    cursor: pointer;
+    .frame-pokeball{
+        margin: auto;
+        margin-top: 100px;
+        width: 300px;
+        height: 300px;
+        .img-pokeball{
+            animation: jump 1s infinite;
+            &:hover{
+                animation: shake .5s forwards;
+            }
+        }
+    }
+}
+.modal-show-pokemon{
+    .modal-content{
+        border: 0;
+        background-color: rgba(255, 255, 255, 0) !important;
+    }
+}

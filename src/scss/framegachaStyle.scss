@@ -1,0 +1,26 @@
+@import url('./_animation.scss');
+.frame-gacha{
+    .gacha-img{
+
+        &:hover{
+            animation: shaking .5s;
+        }
+    }
+    .frame-open-ball{
+        position: fixed;
+        z-index: 10;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.282);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        .img-ball{
+            cursor: pointer;
+            max-width: 500px;
+            animation: drop 1s;
+        }
+    }
+}
+
