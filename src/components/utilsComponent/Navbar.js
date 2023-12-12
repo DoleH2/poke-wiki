@@ -1,11 +1,16 @@
 import "../../scss/navbarStyle.scss";
 import logoPokemon from "../../img/logo-pokemon.png";
 import { useNavigate } from "react-router-dom";
+import { openLoginModal } from "../../redux/reducers/toggleSlice";
+import { useDispatch } from "react-redux";
+import LoginModal from "./LoginModal";
 export const Navbar = () => {
+  const dispatch = useDispatch();
   let navigate = useNavigate();
   const changeRouter = (path, data) => {
     navigate(path, { state: data });
   };
+
   return (
     <nav className="navbar-frame bg-dark d-flex align-items-center">
       <div className="container d-flex align-items-center justify-content-between gap-3 p-0">
@@ -38,6 +43,12 @@ export const Navbar = () => {
               onClick={() => changeRouter("/gacha")}
             >
               Gacha
+            </button>
+            <button
+              className="btn d-block mx-auto"
+              onClick={() => dispatch(openLoginModal())}
+            >
+              Login
             </button>
           </div>
           {/*  */}
@@ -83,6 +94,12 @@ export const Navbar = () => {
               >
                 Gacha
               </button>
+              <button
+                className="btn d-block mx-auto"
+                onClick={() => dispatch(openLoginModal())}
+              >
+                Login
+              </button>
             </div>
           </div>
           <button
@@ -96,6 +113,7 @@ export const Navbar = () => {
           </button>
         </div>
       </div>
+      <LoginModal />
     </nav>
   );
 };

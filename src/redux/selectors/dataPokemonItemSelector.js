@@ -1,1 +1,0 @@
-export const getDataItemPokemon = (state) => state.pokemonItemData;

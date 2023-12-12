@@ -19,7 +19,6 @@ export const ListPokemon = () => {
     limit: limit,
     offset: (page - 1) * limit,
   });
-  console.log(data);
   useEffect(() => {
     refetch();
   }, [page]);

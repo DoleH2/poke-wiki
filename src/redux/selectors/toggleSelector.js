@@ -1,0 +1,1 @@
+export const getToggleLogin = (state) => state.toggle.toggleLoginModal;

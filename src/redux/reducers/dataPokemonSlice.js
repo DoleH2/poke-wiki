@@ -7,9 +7,6 @@ const pokemonDataSlice = createSlice({
     search: ""
   },
   reducers: {
-    setAllData: (state, action) => {
-      state.allData = action.payload;
-    },
     filterNamePokemon: (state, action) => {
       const listData = action.payload.list;
       if (state.search === "") {

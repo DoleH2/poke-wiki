@@ -40,7 +40,7 @@ export const SearchFrame = () => {
         <SearchPokemon
           onChange={(value) => handleChangeSearch(value)}
           defaultValue={searchState}
-          placeHolder="Nhap ten pokemon"
+          placeholder="Nhap ten pokemon"
           filterSearch={filterSearch}
           className="mx-auto"
           style={{ width: '350px' }}

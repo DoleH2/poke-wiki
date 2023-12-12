@@ -8,7 +8,8 @@
     width: 100%;
     position: sticky;
     top: 0;
-    z-index: 2;
+    z-index: 99;
+
     .logo-frame {
         img {
             object-fit: cover;
@@ -18,16 +19,18 @@
     }
 
     .func-frame {
-        .offcanvas{
+        .offcanvas {
             color: $title-text;
-            .offcanvas-header{
+
+            .offcanvas-header {
                 img {
                     object-fit: cover;
                     max-height: 50px;
-        
+
                 }
             }
         }
+
         button {
             color: $title-text !important;
         }
@@ -39,7 +42,7 @@
 }
 
 @media (min-width:768px) {
-    .offcanvas-backdrop{
+    .offcanvas-backdrop {
         display: none;
     }
 }

@@ -1,7 +1,6 @@
 import SunRay from "../utilsComponent/SunRay";
 import pokeBall from "../../img/pokeball.png";
 import "../../scss/gachaframestyle.scss";
-import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useEffect, useState } from "react";
 import LoadCircle from "../utilsComponent/LoadCircle";
@@ -9,11 +8,16 @@ const GachaFrame = () => {
   const [show, setShow] = useState(false);
   const handleClose = () => setShow(false);
   const [loadPokemon, setLoadPokemon] = useState(false);
+  //load image va du lieu hoan tat
   const handleShow = () => {
     setShow(true);
     setLoadPokemon(false);
   };
-  useEffect(() => {}, []);
+  //click de hien thi pokemon
+  const [appear, setAppear] = useState(false);
+  const handleAppear = () => {
+    setAppear(true);
+  }
   return (
     <div className="frame-gacha-pokemon">
       <div className="frame-pokeball position-relative p-5 pt-3 bg-white rounded">
@@ -29,6 +33,7 @@ const GachaFrame = () => {
         className="modal-show-pokemon"
         centered
         show={show}
+        backdrop="static"
         onHide={handleClose}
       >
         <Modal.Header
@@ -37,28 +42,21 @@ const GachaFrame = () => {
         ></Modal.Header>
         <Modal.Body className="d-flex justify-content-center flex-column">
           {!loadPokemon && <LoadCircle />}
-
-          <img
-            onLoad={() => setLoadPokemon(true)}
-            className="w-100 img-pokemon"
-            style={{ zIndex: "10" }}
-            src={
-              "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/37.png"
-            }
-          ></img>
-          {loadPokemon && (
-            <>
-              <SunRay />
-              <div className="frame-stats d-flex justify-content-between">
-                <p className="text-white">HP</p>
-                <p className="text-white">ATK</p>
-                <p className="text-white">DEF</p>
-                <p className="text-white">S.ATK</p>
-                <p className="text-white">S.DEF</p>
-                <p className="text-white">SPD</p>
-              </div>
-            </>
-          )}
+          <div className={`frame-pokemon-gacha ${appear && 'open'}`} onClick={handleAppear}>
+            <img
+              onLoad={() => setLoadPokemon(true)}
+              className="w-100 img-pokemon"
+              style={{ zIndex: "10" }}
+              src={
+                "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/20.png"
+              }
+            ></img>
+            {loadPokemon && (
+              <>
+                <SunRay />
+              </>
+            )}
+          </div>
         </Modal.Body>
       </Modal>
     </div>

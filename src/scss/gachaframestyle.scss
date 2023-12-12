@@ -1,22 +1,68 @@
 @import url('./_animation.scss');
-.frame-gacha-pokemon{
+
+.common {
+    color: white;
+}
+
+.rare {
+    color: green;
+}
+
+.epic {
+    color: purple;
+}
+
+.legend {
+    color: rgb(255, 186, 39);
+}
+
+
+
+.frame-gacha-pokemon {
     cursor: pointer;
-    .frame-pokeball{
+
+    .frame-pokeball {
         margin: auto;
         margin-top: 100px;
         width: 300px;
         height: 300px;
-        .img-pokeball{
+
+        .img-pokeball {
             animation: jump 1s infinite;
-            &:hover{
+
+            &:hover {
                 animation: shake .5s forwards;
             }
         }
     }
 }
-.modal-show-pokemon{
-    .modal-content{
+
+.modal-show-pokemon {
+    .modal-content {
         border: 0;
         background-color: rgba(255, 255, 255, 0) !important;
+
+        .modal-header {
+            .btn-close {
+                background-color: white !important;
+            }
+        }
+
+        .modal-body {
+            .frame-pokemon-gacha {
+                .img-pokemon {
+                    position: relative;
+                    filter: brightness(0);
+                    z-index: 10;
+                }
+            }
+
+            .frame-pokemon-gacha.open {
+                .img-pokemon {
+                    filter: brightness(1);
+                    animation: effectChangeColor 5s infinite;
+                }
+            }
+        }
     }
 }
