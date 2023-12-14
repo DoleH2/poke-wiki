@@ -1,39 +1,45 @@
+@import url('./_animation.scss');
 .frame-home-page {
-    .frame-button.list-pokemon-btn {
-        background-image: url('../img/pokemon-bg-btn.jpg');
-    }
+    // .frame-button.list-pokemon-btn {
+    //     background-image: url('../img/pokemon-bg-btn.jpg');
+    // }
 
-    .frame-button.compare-btn {
-        background-image: url('../img/bg-compare-btn.jpg');
-    }
+    // .frame-button.compare-btn {
+    //     background-image: url('../img/bg-compare-btn.jpg');
+    // }
 
-    .frame-button {
-        cursor: pointer;
-        background-position: center;
-        background-size: 100%;
-        background-repeat: no-repeat;
-        width: 250px;
-        height: 100px;
-        border: 2px solid white;
-        transition: all .5s;
-        display: flex;
-        justify-content: center;
-        align-items: center;
+    // .frame-button {
+    //     cursor: pointer;
+    //     background-position: center;
+    //     background-size: 100%;
+    //     background-repeat: no-repeat;
+    //     width: 250px;
+    //     height: 100px;
+    //     border: 2px solid white;
+    //     transition: all .5s;
+    //     display: flex;
+    //     justify-content: center;
+    //     align-items: center;
 
-        &:hover {
-            transition: all .5s;
-            background-size: 110%;
-        }
+    //     &:hover {
+    //         transition: all .5s;
+    //         background-size: 110%;
+    //     }
 
-        p {
-            text-shadow: 2px 0 black,
-                -2px 0 black,
-                0 2px black,
-                0 -2px black,
-                1px 1px black,
-                1px -1px black,
-                -1px 1px black,
-                -1px -1px black
+    //     p {
+    //         text-shadow: 2px 0 black,
+    //             -2px 0 black,
+    //             0 2px black,
+    //             0 -2px black,
+    //             1px 1px black,
+    //             1px -1px black,
+    //             -1px 1px black,
+    //             -1px -1px black
+    //     }
+    // }
+    .home-page{
+        .img-home-page{
+            filter: drop-shadow(1px 1px 5px rgb(255, 169, 78)) drop-shadow(-1px -1px 5px rgb(255, 169, 78));
         }
     }
 
@@ -43,6 +49,15 @@
         background-position: center;
         position: relative;
         overflow: hidden;
+        .frame-content-gacha-homepage{
+            position: relative;
+            .gacha-ball-homepage{
+                img{
+                    filter: drop-shadow(1px 1px 5px rgb(255, 255, 255)) drop-shadow(-1px -1px 5px rgb(255, 255, 255));
+                    animation: jump 2s infinite;
+                }
+            }
+        }
 
     }
 
@@ -54,5 +69,21 @@
         width: 100%;
         height: 100%;
         background-color: rgba(0, 0, 0, 0.712);
+    }
+    .frame-compare-homepage{
+        background-image: url('../img/bg-compare-homepage.jpg');
+        background-size: cover;
+        position: relative;
+        .row{
+            position: relative;
+        }
+    }
+    .frame-compare-homepage::before{
+        content: "";
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.823);
     }
 }
