@@ -1,6 +1,6 @@
 import "./App.css";
 import "./scss/framerootstyle.scss";
-import { PokeWikiFrame } from "./components/PokeWikiFrame";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.min.js";
 import {
@@ -14,6 +14,7 @@ import { PageInfoPokemon } from "./components/infoPokemonPage/PageInfoPokemon";
 import { PokeListFrame } from "./components/listPokemonPage/PokeListPage";
 import PageComparePokemon from "./components/comparePokemonPage/PageComparePokemon";
 import GachaPage from "./components/gachaPokemonPage/GachaPage";
+import { PokeWikiFrame } from "./components/homePage/PokeWikiFrame";
 function App() {
   return (
     <Routes>

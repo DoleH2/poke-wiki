@@ -1,5 +1,6 @@
-import HomePage from "./homePage/HomePage";
-import { Navbar } from "./utilsComponent/Navbar";
+import { Navbar } from "../utilsComponent/Navbar";
+import HomePage from "./HomePage";
+
 
 export const PokeWikiFrame = () => {
   return (
