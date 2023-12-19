@@ -43,15 +43,12 @@ const BoxSearchCompare = ({ active }) => {
     }, 1000);
   };
   const handleClickChoosePokemon = useCallback((data) => {
-    console.log(data);
     handleClose();
     setChoosePokemonState(data);
     if (!toggleChoose) {
-      console.log(toggleChoose);
       setToggleChoose(true);
       active(true);
     } else {
-      console.log('vao neeee');
       active(false);
     }
   }, [toggleChoose])

@@ -4,13 +4,19 @@ import { useNavigate } from "react-router-dom";
 import { openLoginModal } from "../../redux/reducers/toggleSlice";
 import { useDispatch } from "react-redux";
 import LoginModal from "./LoginModal";
+import RegisterModal from "./RegisterModal";
+import Cookies from 'js-cookie';
+import { useEffect } from "react";
 export const Navbar = () => {
   const dispatch = useDispatch();
   let navigate = useNavigate();
   const changeRouter = (path, data) => {
     navigate(path, { state: data });
   };
-
+  useEffect(() => {
+    const cookie = Cookies.get('Poke');
+    console.log(cookie);
+  }, [])
   return (
     <nav className="navbar-frame bg-dark d-flex align-items-center">
       <div className="container d-flex align-items-center justify-content-between gap-3 p-0">
@@ -114,6 +120,7 @@ export const Navbar = () => {
         </div>
       </div>
       <LoginModal />
+      <RegisterModal />
     </nav>
   );
 };

@@ -1,4 +1,5 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+const urlRoot = 'http://localhost:8080';
 const apiFetch = createApi({
   reducerPath: "apiFetch",
   baseQuery: fetchBaseQuery({
@@ -22,8 +23,18 @@ const apiFetch = createApi({
         url: `https://pokeapi.co/api/v2/pokemon/?limit=${limit}&offset=${offset}`,
       }),
       keepUnusedDataFor: Infinity
+    }),
+    login: build.mutation({
+      query: (userData) => ({
+        url: `${urlRoot}/login`,
+        method: 'POST',
+        body: userData
+      })
     })
   }),
 });
 export default apiFetch;
-export const { useGetListPokemonQuery, useGetDetailPokemonQuery, useGetListPokemonMainQuery } = apiFetch;
+export const { useGetListPokemonQuery,
+  useGetDetailPokemonQuery,
+  useGetListPokemonMainQuery,
+  useLoginMutation } = apiFetch;

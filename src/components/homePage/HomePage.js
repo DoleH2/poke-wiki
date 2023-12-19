@@ -1,5 +1,5 @@
 import "../../scss/homepageStyle.scss";
-import SendMessage from "../../apiFacebook/SendMessage";
+// import SendMessage from "../../apiFacebook/SendMessage";
 import MenuShow from "../utilsComponent/MenuShow";
 import charizard from "../../img/charizard.png";
 import Button from "react-bootstrap/button";
@@ -38,7 +38,7 @@ const HomePage = () => {
       </div>
       <GachaHomePage />
       <CompareHomePage />
-      <SendMessage idFB={"812074489154828"} />
+      {/* <SendMessage idFB={"812074489154828"} /> */}
     </div>
   );
 };
