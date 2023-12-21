@@ -3,22 +3,40 @@ import Modal from "react-bootstrap/Modal";
 import Button from 'react-bootstrap/button';
 import { getToggleLogin } from "../../redux/selectors/toggleSelector";
 import { useForm } from 'react-hook-form';
-import { closeLoginModal, openRegisterModal } from "../../redux/reducers/toggleSlice";
+import { closeLoginModal, openRegisterModal, userLogin } from "../../redux/reducers/toggleSlice";
 import { postRequest } from "../../axios/httpRequest";
 import { useLoginMutation } from "../../redux/reducers/apiFetch";
+import cookie from 'js-cookie';
+
 const LoginModal = () => {
     const dispatch = useDispatch();
-    const { register, handleSubmit } = useForm();
+    const { register, reset, clearErrors, handleSubmit, setError, formState: { errors } } = useForm();
     const toggleLogin = useSelector(getToggleLogin);
-    const [submitLogin, { data, error, status }] = useLoginMutation();
+    const [submitLogin] = useLoginMutation();
 
     const handleOpenRegister = () => {
         dispatch(closeLoginModal());
+        reset();
         dispatch(openRegisterModal());
     }
     const handleSubmitLogin = async (data) => {
-        const result = await submitLogin(data);
-        console.log(result);
+        try {
+            const result = await submitLogin(data).unwrap();
+            dispatch(userLogin());
+            dispatch(closeLoginModal());
+            reset();
+        } catch (error) {
+            if (error.status === 400) {
+                console.log(error);
+                setError("errorBackend", { type: 'custom', message: error.data.message });
+            } else if (error.status === 500) {
+                console.log(error);
+                //chuyen trang error
+            }
+        }
+    }
+    const handleClearError = () => {
+        clearErrors();
     }
 
     return (
@@ -35,14 +53,17 @@ const LoginModal = () => {
                 <Modal.Body className="d-flex justify-content-center flex-column">
                     <label htmlFor="username">Email</label>
                     <input id="username" className="form-control mb-3" placeholder="example@xyz.com"
-                        {...register("email", {})}
+                        {...register("email")}
+                        onChange={handleClearError}
                     ></input>
                     <label htmlFor="password">Password</label>
                     <input id="password" type="password" className="form-control" placeholder="Enter your password"
-                        {...register("password", {})}
+                        {...register("password")}
+                        onChange={handleClearError}
                     ></input>
                     <Button variant="link" className="p-0 text-start"
                         style={{ textDecoration: "none", color: 'rgb(47 47 47)' }}>Forget password ?</Button>
+                    <p className="notify text-danger m-0">{errors.errorBackend && errors.errorBackend.message}</p>
                 </Modal.Body>
                 <Modal.Footer className="border-0">
                     <div className="d-flex w-100 flex-column gap-2">

@@ -1,9 +1,15 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import cookie from 'js-cookie';
 const urlRoot = 'http://localhost:8080';
 const apiFetch = createApi({
   reducerPath: "apiFetch",
   baseQuery: fetchBaseQuery({
-    baseUrl: "",
+    baseUrl: "http://localhost:8080",
+    credentials: 'include',
+    prepareHeaders: (headers) => {
+      headers.set('Poke', ('Poke=' + cookie.get("Poke")) || null)
+      return headers;
+    }
   }),
   endpoints: (build) => ({
     getListPokemon: build.query({
@@ -30,6 +36,19 @@ const apiFetch = createApi({
         method: 'POST',
         body: userData
       })
+    }),
+    logout: build.mutation({
+      query: () => ({
+        url: `${urlRoot}/signout`,
+        method: 'GET'
+      })
+    }),
+    signup: build.mutation({
+      query: (userData) => ({
+        url: `${urlRoot}/register`,
+        method: 'POST',
+        body: userData
+      })
     })
   }),
 });
@@ -37,4 +56,4 @@ export default apiFetch;
 export const { useGetListPokemonQuery,
   useGetDetailPokemonQuery,
   useGetListPokemonMainQuery,
-  useLoginMutation } = apiFetch;
+  useLoginMutation, useLogoutMutation, useSignupMutation } = apiFetch;

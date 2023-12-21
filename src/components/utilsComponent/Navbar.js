@@ -2,21 +2,22 @@ import "../../scss/navbarStyle.scss";
 import logoPokemon from "../../img/logo-pokemon.png";
 import { useNavigate } from "react-router-dom";
 import { openLoginModal } from "../../redux/reducers/toggleSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import LoginModal from "./LoginModal";
 import RegisterModal from "./RegisterModal";
-import Cookies from 'js-cookie';
 import { useEffect } from "react";
+import Cookies from "js-cookie";
+import UserLogin from "./UserLogin";
+import { getToggleStatusLogin } from "../../redux/selectors/toggleSelector";
 export const Navbar = () => {
   const dispatch = useDispatch();
   let navigate = useNavigate();
   const changeRouter = (path, data) => {
     navigate(path, { state: data });
   };
-  useEffect(() => {
-    const cookie = Cookies.get('Poke');
-    console.log(cookie);
-  }, [])
+  const cookie = Cookies.get('Poke');
+  const statusLogin = useSelector(getToggleStatusLogin);
+
   return (
     <nav className="navbar-frame bg-dark d-flex align-items-center">
       <div className="container d-flex align-items-center justify-content-between gap-3 p-0">
@@ -50,12 +51,16 @@ export const Navbar = () => {
             >
               Gacha
             </button>
-            <button
-              className="btn d-block mx-auto"
-              onClick={() => dispatch(openLoginModal())}
-            >
-              Login
-            </button>
+            {
+              statusLogin ?
+                (<UserLogin />) :
+                (<button
+                  className="btn d-block mx-auto"
+                  onClick={() => dispatch(openLoginModal())}
+                >
+                  Login
+                </button>)
+            }
           </div>
           {/*  */}
           <div
@@ -100,12 +105,16 @@ export const Navbar = () => {
               >
                 Gacha
               </button>
-              <button
-                className="btn d-block mx-auto"
-                onClick={() => dispatch(openLoginModal())}
-              >
-                Login
-              </button>
+              {
+                statusLogin ?
+                  (<UserLogin />) :
+                  (<button
+                    className="btn d-block mx-auto"
+                    onClick={() => dispatch(openLoginModal())}
+                  >
+                    Login
+                  </button>)
+              }
             </div>
           </div>
           <button
