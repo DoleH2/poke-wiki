@@ -5,7 +5,8 @@ const toggleSlice = createSlice({
   initialState: {
     toggleLoginModal: false,
     toggleRegisterModal: false,
-    toggleStatusLogin: false
+    toggleStatusLogin: false,
+    toggleResetPassModal: false
   },
   reducers: {
     openLoginModal: (state) => {
@@ -20,16 +21,21 @@ const toggleSlice = createSlice({
     closeRegisterModal: (state) => {
       state.toggleRegisterModal = false;
     },
+    openResetPassModal: (state) => {
+      state.toggleResetPassModal = true;
+    },
+    closeResetPassModal: (state) => {
+      state.toggleResetPassModal = false;
+    },
     userLogin: (state) => {
       state.toggleStatusLogin = true;
     },
     userLogout: (state) => {
-      console.log('vao logout');
       state.toggleStatusLogin = false;
     }
   }
 });
 
 export default toggleSlice.reducer;
-export const { openLoginModal, closeLoginModal,
+export const { openLoginModal, closeLoginModal, openResetPassModal, closeResetPassModal,
   openRegisterModal, closeRegisterModal, userLogin, userLogout } = toggleSlice.actions;

@@ -49,6 +49,13 @@ const apiFetch = createApi({
         method: 'POST',
         body: userData
       })
+    }),
+    resetpass: build.mutation({
+      query: (userData) => ({
+        url: `${urlRoot}/confirm-reset-pass`,
+        method: 'POST',
+        body: userData
+      })
     })
   }),
 });
@@ -56,4 +63,5 @@ export default apiFetch;
 export const { useGetListPokemonQuery,
   useGetDetailPokemonQuery,
   useGetListPokemonMainQuery,
-  useLoginMutation, useLogoutMutation, useSignupMutation } = apiFetch;
+  useLoginMutation, useLogoutMutation,
+  useSignupMutation, useResetpassMutation } = apiFetch;

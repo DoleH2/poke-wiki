@@ -1,52 +1,80 @@
 import { useSelector, useDispatch } from "react-redux";
-import Modal from "react-bootstrap/Modal";
-import Button from 'react-bootstrap/button';
 import { getToggleRegister } from "../../redux/selectors/toggleSelector";
 import { closeRegisterModal, openLoginModal } from "../../redux/reducers/toggleSlice";
 import { useForm } from "react-hook-form";
-import { useCallback } from "react";
+import { useState } from "react";
 import { validateEqualString } from "../../validate/validate";
 import { useSignupMutation } from "../../redux/reducers/apiFetch";
+import Modal from "react-bootstrap/Modal";
+import Button from 'react-bootstrap/button';
+import LoadCircle from "./LoadCircle";
 
 
 
 
 const RegisterModal = () => {
     const dispatch = useDispatch();
+    const { register, reset, clearErrors, handleSubmit, watch, formState: { errors }, setError } = useForm();
     const toggleRegister = useSelector(getToggleRegister);
-    const { register, reset, clearErrors, handleSubmit, watch, formState: { errors } } = useForm();
     const [submitRegister] = useSignupMutation();
+
+    const [debounceSubmitRegister, setDebounceSubmitRegister] = useState(true);
+
+
     const handleOpenLogin = () => {
         dispatch(closeRegisterModal());
+        reset();
         dispatch(openLoginModal());
     }
 
     const handleClearError = (typeClear) => {
         clearErrors(typeClear);
+        clearErrors("customError");
     }
 
     const handleSubmitRegister = async (data) => {
-        try {
-            const result = await submitRegister(data);
-        } catch (error) {
-
+        if (debounceSubmitRegister) {
+            setDebounceSubmitRegister(false);
+        } else {
+            return;
         }
+        try {
+            const result = await submitRegister(data).unwrap();
+            handleOpenLogin();
+        } catch (error) {
+            console.log(error);
+            if (error.status === 400) {
+                setError("customError", { type: 'custom', message: error.data.message })
+            } else if (error.status === 500) {
+                console.log(error);
+            } else {
+                console.log(error);
+            }
+        }
+        setDebounceSubmitRegister(true);
     }
 
     const validateInput = {
         password: {
             onChange: (e) => handleClearError("password"),
-            required: { value: true, message: "Nhap password" },
-            pattern: { value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/, message: "Sai mat khau" }
+            required: { value: true, message: "Please enter a password" },
+            pattern: {
+                value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/
+                , message: "Password must has at least 8 characters that include at least 1 lowercase character, 1 uppercase characters, 1 number and 1 special character"
+            }
         },
         email: {
             onChange: (e) => handleClearError("email"),
-            required: { value: true, message: "Nhap password" },
-            pattern: { value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/, message: "Sai format Email" },
+            required: { value: true, message: "Please enter an email" },
+            pattern: {
+                value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/
+                , message: "Wrong email format"
+            },
         },
         repassword: {
             onChange: (e) => handleClearError("repassword"),
-            validate: () => !validateEqualString(watch("password"), watch("repassword")) && "Sai Repassword"
+            required: { value: true, message: "Please enter the password again" },
+            validate: () => !validateEqualString(watch("password"), watch("repassword")) ? "Password do not match" : true
         }
     }
 
@@ -55,7 +83,7 @@ const RegisterModal = () => {
         <Modal
             className="modal-register"
             show={toggleRegister}
-            onHide={() => dispatch(closeRegisterModal())}
+            onHide={() => { dispatch(closeRegisterModal()); reset() }}
         >
             <form onSubmit={handleSubmit(handleSubmitRegister)}>
                 <Modal.Header
@@ -63,8 +91,8 @@ const RegisterModal = () => {
                     closeButton
                 ><p className="m-0 fs-5 fw-bold">Register</p></Modal.Header>
                 <Modal.Body className="d-flex justify-content-center flex-column">
-                    <label htmlFor="username">Email</label>
-                    <input id="username" className="form-control" placeholder="example@xyz.com"
+                    <label htmlFor="email-register">Email</label>
+                    <input id="email-register" className="form-control" placeholder="example@xyz.com"
                         {...register("email", validateInput.email)}
                     ></input>
                     <p className="notify text-danger">{errors.email && errors.email.message}</p>
@@ -77,10 +105,17 @@ const RegisterModal = () => {
                     <input id="repassword" type="password" className="form-control" placeholder="Enter Re-password"
                         {...register("repassword", validateInput.repassword)}></input>
                     <p className="notify text-danger">{errors.repassword && errors.repassword.message}</p>
+                    <p className="notify text-danger">{errors.customError && errors.customError.message}</p>
                 </Modal.Body>
                 <Modal.Footer className="border-0">
                     <div className="d-flex w-100 flex-column gap-2">
-                        <Button type="submit" variant="danger" className="w-100 fw-bold py-3">Sign up</Button>
+                        {
+                            debounceSubmitRegister ?
+                                <Button type="submit" variant="danger" className="w-100 fw-bold py-3"
+                                >Sign up</Button>
+                                : <LoadCircle />
+                        }
+
                         <Button variant="link" style={{ textDecoration: "none", color: 'rgb(47 47 47)' }} onClick={handleOpenLogin}>Already an account ? <span className="fw-bold" >Log in</span></Button>
                     </div>
                 </Modal.Footer>

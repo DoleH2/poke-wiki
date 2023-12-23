@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import Cookies from "js-cookie";
 import UserLogin from "./UserLogin";
 import { getToggleStatusLogin } from "../../redux/selectors/toggleSelector";
+import ResetPasswordModal from "./ResetPasswordModal";
 export const Navbar = () => {
   const dispatch = useDispatch();
   let navigate = useNavigate();
@@ -130,6 +131,7 @@ export const Navbar = () => {
       </div>
       <LoginModal />
       <RegisterModal />
+      <ResetPasswordModal />
     </nav>
   );
 };
