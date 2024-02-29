@@ -5,7 +5,7 @@ import { getToggleLogin } from "../../redux/selectors/toggleSelector";
 import { useForm } from 'react-hook-form';
 import { closeLoginModal, openRegisterModal, openResetPassModal, userLogin } from "../../redux/reducers/toggleSlice";
 import { postRequest } from "../../axios/httpRequest";
-import { useLoginMutation } from "../../redux/reducers/apiFetch";
+import { useLoginMutation } from "../../redux/reducers/apiUser";
 import cookie from 'js-cookie';
 import LoadCircle from "./LoadCircle";
 import { useState } from "react";
@@ -45,12 +45,23 @@ const LoginModal = () => {
             } else if (error.status === 500) {
                 console.log(error);
                 //chuyen trang error
+            } else {
+                console.log(error);
             }
         }
         setDebounceSubmitLogin(true);
     }
     const handleClearError = () => {
         clearErrors();
+    }
+
+    const validate = {
+        email: {
+            onChange: () => handleClearError(),
+        },
+        password: {
+            onChange: () => handleClearError(),
+        }
     }
 
     return (
@@ -66,14 +77,12 @@ const LoginModal = () => {
                 ><p className="m-0 fs-5 fw-bold">Login</p></Modal.Header>
                 <Modal.Body className="d-flex justify-content-center flex-column">
                     <label htmlFor="email-login">Email</label>
-                    <input id="email-login" className="form-control mb-3" placeholder="example@xyz.com"
-                        {...register("email")}
-                        onChange={handleClearError}
+                    <input id="email-login" className="form-control mb-3" placeholder="example@xyz.com" tabIndex={1}
+                        {...register("email", validate.email)}
                     ></input>
                     <label htmlFor="password">Password</label>
-                    <input id="password" type="password" className="form-control" placeholder="Enter your password"
-                        {...register("password")}
-                        onChange={handleClearError}
+                    <input id="password" type="password" className="form-control" placeholder="Enter your password" tabIndex={2}
+                        {...register("password", validate.password)}
                     ></input>
                     <Button variant="link" className="p-0 text-start"
                         style={{ textDecoration: "none", color: 'rgb(47 47 47)' }}

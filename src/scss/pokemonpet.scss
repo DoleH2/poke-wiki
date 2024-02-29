@@ -1,0 +1,90 @@
+@import url('./_animation.scss');
+
+.frame-result-gacha-pet {
+    .common {
+        color: rgb(69, 69, 69);
+    }
+
+    .rare {
+        color: rgb(61, 61, 255);
+    }
+
+    .epic {
+        color: rgb(171, 7, 171);
+    }
+
+    .legend {
+        color: rgb(233, 136, 0);
+    }
+
+    width: 220px;
+    height: 320px;
+
+    .frame-result-inner {
+        width: 100%;
+        height: 100%;
+        transition: transform 0.6s;
+        transform-style: preserve-3d;
+
+        .frame-pet-front,
+        .frame-pet-back {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+        }
+
+        .frame-pet-front {
+            .frame-pet-front-content {
+                background-size: cover;
+                background-position: center;
+
+                .info-pokemon-gacha {
+                    p {
+                        height: 35px;
+                        overflow: hidden;
+                    }
+                }
+
+                .img-pokemon {
+                    animation: effectChangeColor 5s infinite;
+                }
+            }
+        }
+
+        .frame-pet-back {
+            transform: rotateY(180deg);
+
+            .content-back {
+                background-size: cover;
+                background-position: center;
+            }
+        }
+    }
+
+    &:hover {
+        .frame-result-inner {
+            transform: rotateY(180deg);
+        }
+    }
+}
+
+
+.frame-result-gacha-pet {
+    .frame-pet-front {
+        background-color: rgb(195, 195, 195);
+
+        .frame-pet-front-content {
+            background-image: url('../img/bgCardPokemon/bg-card-front-normal.jpg');
+        }
+    }
+
+    .frame-pet-back {
+        background-color: rgb(195, 195, 195);
+
+        .content-back {
+            background-image: url('../img/bgCardPokemon/bg-card-back-pokemon.jpg');
+        }
+    }
+}

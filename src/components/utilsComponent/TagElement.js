@@ -6,9 +6,9 @@ export const TagElement = ({ data }) => {
     <>
       {
         <div
-          className={`frame-tag-element rounded-3 px-3 py-1 text-white fw-bold ${data.type.name}`}
+          className={`frame-tag-element px-3 py-1 text-white fw-bold border ${data}`}
         >
-          {upperFirst(data.type.name)}
+          {upperFirst(data)}
         </div>
       }
     </>

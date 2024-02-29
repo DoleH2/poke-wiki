@@ -1,5 +1,5 @@
 import "../../scss/sunray.scss";
-const SunRay = ({ srcImg }) => {
+const SunRay = () => {
   return (
     <div className="sun bg-white">
       <div className="ray_box">

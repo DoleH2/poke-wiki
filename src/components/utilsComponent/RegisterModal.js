@@ -4,7 +4,7 @@ import { closeRegisterModal, openLoginModal } from "../../redux/reducers/toggleS
 import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { validateEqualString } from "../../validate/validate";
-import { useSignupMutation } from "../../redux/reducers/apiFetch";
+import { useSignupMutation } from "../../redux/reducers/apiUser";
 import Modal from "react-bootstrap/Modal";
 import Button from 'react-bootstrap/button';
 import LoadCircle from "./LoadCircle";

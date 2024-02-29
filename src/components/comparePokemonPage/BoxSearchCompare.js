@@ -1,5 +1,5 @@
 import { Suspense, lazy, useCallback, useMemo, useState } from "react";
-import { useGetListPokemonMainQuery } from "../../redux/reducers/apiFetch";
+import { useGetListPokemonMainQuery } from "../../redux/reducers/apiPokeFetch";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import { useForm } from 'react-hook-form';

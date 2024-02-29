@@ -1,11 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
+import Cookies from "js-cookie";
 
 const toggleSlice = createSlice({
   name: "toggle",
   initialState: {
     toggleLoginModal: false,
     toggleRegisterModal: false,
-    toggleStatusLogin: false,
+    toggleStatusLogin: Cookies.get('Poke') ? true : false,
     toggleResetPassModal: false
   },
   reducers: {

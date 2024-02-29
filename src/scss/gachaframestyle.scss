@@ -20,47 +20,37 @@
 
 .frame-gacha-pokemon {
     cursor: pointer;
-
-    .frame-pokeball {
-        margin: auto;
-        margin-top: 100px;
-        width: 300px;
-        height: 300px;
-
-        .img-pokeball {
-            animation: jump 1s infinite;
-
-            &:hover {
-                animation: shake .5s forwards;
-            }
-        }
-    }
 }
 
-.modal-show-pokemon {
+.modal-gacha {
     .modal-content {
         border: 0;
         background-color: rgba(255, 255, 255, 0) !important;
 
-        .modal-header {
+        .modal-gacha-header {
             .btn-close {
                 background-color: white !important;
             }
         }
 
-        .modal-body {
+        .modal-gacha-body {
             .frame-pokemon-gacha {
-                .img-pokemon {
-                    position: relative;
-                    filter: brightness(0);
-                    z-index: 10;
+                &::-webkit-scrollbar {
+                    background-color: rgb(18, 17, 17);
+                    width: 10px;
                 }
-            }
 
-            .frame-pokemon-gacha.open {
-                .img-pokemon {
-                    filter: brightness(1);
-                    animation: effectChangeColor 5s infinite;
+                &::-webkit-scrollbar-track {
+                    background-color: rgb(34, 33, 33);
+                }
+
+                &::-webkit-scrollbar-thumb {
+                    background-color: rgb(20, 20, 20);
+                    border-radius: 30px;
+                }
+
+                .info-pokemon-gacha {
+                    z-index: 11;
                 }
             }
         }

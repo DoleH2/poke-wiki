@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { useResetpassMutation } from "../../redux/reducers/apiFetch";
+import { useResetpassMutation } from "../../redux/reducers/apiUser";
 import { closeResetPassModal, openLoginModal } from "../../redux/reducers/toggleSlice";
 import { getToggleResetPass } from "../../redux/selectors/toggleSelector";
 import { useState } from "react";

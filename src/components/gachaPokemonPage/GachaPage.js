@@ -3,7 +3,7 @@ import GachaFrame from "./GachaFrame";
 
 const GachaPage = () => {
     return (
-        <div className="container-fluid mx-auto position-relative p-0 m-0" style={{ minWidth: '250px' }}>
+        <div className="container-fluid mx-auto position-relative p-0 m-0" style={{ minWidth: '330px' }}>
             <Navbar />
             <GachaFrame />
         </div>

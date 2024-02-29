@@ -1,64 +1,85 @@
-import SunRay from "../utilsComponent/SunRay";
-import pokeBall from "../../img/pokeball.png";
+
 import "../../scss/gachaframestyle.scss";
-import Modal from "react-bootstrap/Modal";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import GachaPokemon from "./GachaPokemon";
+import SummonFrame from './SummonFrame';
+import dialga from '../../img/Dialga-Pokemon-Transparent-PNG.png';
+
+import { useDispatch } from "react-redux";
+import { openLoginModal } from "../../redux/reducers/toggleSlice";
 import LoadCircle from "../utilsComponent/LoadCircle";
+import ModalGachaPet from "./ModalGachaPet";
+import { useGachax10Mutation, useGachax1Mutation } from "../../redux/reducers/apiMember";
 const GachaFrame = () => {
+  const dispatch = useDispatch();
+  const [gachax1, resultx1] = useGachax1Mutation();
+  const [gachax10, resultx10] = useGachax10Mutation();
+  const [debounceSummon, setDebounceSummon] = useState(true);
   const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const [loadPokemon, setLoadPokemon] = useState(false);
-  //load image va du lieu hoan tat
-  const handleShow = () => {
-    setShow(true);
-    setLoadPokemon(false);
-  };
-  //click de hien thi pokemon
-  const [appear, setAppear] = useState(false);
-  const handleAppear = () => {
-    setAppear(true);
+  const [resultGacha, setResultGacha] = useState([]);
+  const handleHide = () => {
+    setShow(false);
+  }
+  const handleSummonx1 = async () => {
+    if (!debounceSummon) return;
+    setDebounceSummon(false);
+    try {
+      setShow(true);
+      const result = await gachax1().unwrap();
+      setResultGacha(result);
+    } catch (error) {
+      if (error.name === 'UnauthorizedException' || (error.status === 401)) {
+        setShow(false);
+        dispatch(openLoginModal());
+      } else {
+        console.log(error);
+      }
+    }
+    setDebounceSummon(true);
+  }
+  const handleSummonx10 = async () => {
+    if (!debounceSummon) return;
+    setDebounceSummon(false);
+    try {
+      setShow(true);
+      const result = await gachax10().unwrap();
+      setResultGacha(result);
+    } catch (error) {
+      setShow(false);
+      dispatch(openLoginModal());
+    }
+    setDebounceSummon(true);
   }
   return (
-    <div className="frame-gacha-pokemon">
-      <div className="frame-pokeball position-relative p-5 pt-3 bg-white rounded">
-        <p className="m-0 h4 mx-auto text-center">Click to Get Pokemon</p>
-        <img
-          src={pokeBall}
-          className="w-100 img-pokeball position-relative"
-          style={{ zIndex: "10" }}
-          onClick={handleShow}
-        ></img>
-      </div>
-      <Modal
-        className="modal-show-pokemon"
-        centered
+    <div className="frame-gacha-pokemon d-flex flex-column gap-2">
+      <SummonFrame
+        hueColor={0}
+        imgPokemon={dialga}
+        title={"Summon Pokemon"}
+        content={"Pokémon, short for \"Pocket Monsters,\" is a vibrant universe teeming with diverse creatures possessing unique abilities. Trainers embark on journeys to capture and train these creatures, engaging in battles to become Pokémon Champions. The bond between trainers and their Pokémon is at the heart of this fantastical world"}
+        onSummonx1={handleSummonx1}
+        onSummonx10={handleSummonx10}
+      />
+      {/* <Modal
+        className="modal-show-pokemon mx-auto"
         show={show}
         backdrop="static"
-        onHide={handleClose}
+        onHide={() => { setShow(false); setResultGacha([]) }}
       >
         <Modal.Header
           className="bg-transparent border-0"
           closeButton
         ></Modal.Header>
-        <Modal.Body className="d-flex justify-content-center flex-column">
-          {!loadPokemon && <LoadCircle />}
-          <div className={`frame-pokemon-gacha ${appear && 'open'}`} onClick={handleAppear}>
-            <img
-              onLoad={() => setLoadPokemon(true)}
-              className="w-100 img-pokemon"
-              style={{ zIndex: "10" }}
-              src={
-                "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/20.png"
-              }
-            ></img>
-            {loadPokemon && (
-              <>
-                <SunRay />
-              </>
-            )}
-          </div>
+        <Modal.Body className="d-flex justify-content-center flex-wrap">
+          {resultx10.isLoading || resultx1.isLoading ? <LoadCircle /> : <GachaPokemon petGacha={resultGacha} />}
+
         </Modal.Body>
-      </Modal>
+      </Modal> */}
+      <ModalGachaPet
+        show={show}
+        onHide={handleHide}
+        body={resultx10.isLoading || resultx1.isLoading ? <LoadCircle /> : <GachaPokemon petGacha={resultGacha} />}
+      />
     </div>
   );
 };

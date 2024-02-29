@@ -4,8 +4,8 @@ import { upperFirst } from "../../utils/handleString";
 import { TagElement } from "../utilsComponent/TagElement";
 import { changeRouter } from "../../utils/handleRouter";
 import { useNavigate } from "react-router-dom";
-import { useGetDetailPokemonQuery } from "../../redux/reducers/apiFetch";
-import { useEffect, useState } from "react";
+import { useGetDetailPokemonQuery } from "../../redux/reducers/apiPokeFetch";
+import { useState } from "react";
 
 const CardPokemon = ({ dataPokemon }) => {
   const [loadImage, setLoadImage] = useState(false);
@@ -52,7 +52,7 @@ const CardPokemon = ({ dataPokemon }) => {
               className={`frame-footer-card flex-wrap gap-2 mt-auto d-flex `}
             >
               {data.types.map((element, idx) => (
-                <TagElement key={idx} data={element} />
+                <TagElement key={idx} data={element.type.name} />
               ))}
             </div>
           </div>

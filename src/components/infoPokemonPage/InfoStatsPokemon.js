@@ -1,6 +1,4 @@
 import FrameLineStatsPokemon from "./FrameLineStatsPokemon";
-import { Suspense, lazy } from "react";
-import { formatNumber } from "../../utils/handleNumber";
 import { upperFirst } from "../../utils/handleString";
 import { TagElement } from '../utilsComponent/TagElement';
 import "../../scss/infostatspokemonStyle.scss";
@@ -9,8 +7,6 @@ import FrameTypes from "./FrameTypes";
 import FrameHeiWei from "./FrameHeiWei";
 
 export const InfoStatsPokemon = ({ dataPokemon }) => {
-  console.log(dataPokemon);
-
   return (
     <div className="container bg-white mt-2 rounded shadow mx-auto">
       <div className="row">

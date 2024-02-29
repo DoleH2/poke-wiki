@@ -2,7 +2,7 @@ import { Suspense, lazy, memo, useCallback, useEffect, useState } from "react";
 import '../../scss/listpokemonstyle.scss';
 import LoadCircle from "../utilsComponent/LoadCircle";
 import { Pagination } from "../utilsComponent/Pagination";
-import { useGetListPokemonQuery } from "../../redux/reducers/apiFetch";
+import { useGetListPokemonQuery } from "../../redux/reducers/apiPokeFetch";
 import { useNavigate, useParams } from "react-router-dom";
 import { changeRouter } from "../../utils/handleRouter";
 const CardPokemon = lazy(() => import("./CardPokemon"));

@@ -2,6 +2,22 @@
 @import 'animation';
 
 //màn full screen
+.navbar-frame .offcanvas-body::-webkit-scrollbar {
+    width: 10px;
+}
+
+.navbar-frame .offcanvas-body::-webkit-scrollbar-track {
+    background-color: $color-dark;
+}
+
+.offcanvas-body::-webkit-scrollbar-thumb {
+    background-color: $color-dark-1;
+    border-radius: 10px;
+}
+
+.offcanvas-body::-webkit-scrollbar-thumb:hover {
+    background-color: $color-dark-2;
+}
 
 .navbar-frame {
     height: 60px;

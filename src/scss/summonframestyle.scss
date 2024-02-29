@@ -1,0 +1,55 @@
+.frame-pokeball {
+    background-image: url('../img/bg-gacha-pokemon.jpg');
+    background-size: cover;
+    background-position: center;
+
+    .frame-character {
+        img {
+            animation: jump 2s infinite;
+
+        }
+
+        filter: drop-shadow(1px 1px 5px rgb(78, 134, 255)) drop-shadow(-1px -1px 5px rgb(78, 134, 255));
+
+    }
+
+    .frame-gacha-func {
+        .frame-content-gacha {
+            .title {
+                background-color: rgba(0, 54, 204, 0.524);
+                text-align: center;
+                color: rgb(255, 255, 255);
+                font-size: 2em;
+            }
+
+            .content {
+                font-size: 1em;
+                font-weight: 600;
+                filter: drop-shadow(1px 1px 1px rgb(255, 255, 255)) drop-shadow(-1px -1px 1px rgb(22, 72, 255));
+            }
+        }
+
+        .btn-style {
+            background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, rgba(0, 207, 255, 1) 52%, rgba(0, 97, 120, 1) 100%);
+
+        }
+    }
+}
+
+@media(min-width:991px) {
+    .frame-gacha-func {
+        font-size: 22px;
+    }
+}
+
+@media(min-width:1200px) {
+    .frame-gacha-func {
+        font-size: 28px;
+    }
+}
+
+@media(min-width:1400px) {
+    .frame-gacha-func {
+        font-size: 32px;
+    }
+}

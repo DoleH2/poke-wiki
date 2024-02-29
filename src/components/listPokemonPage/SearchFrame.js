@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import {
   filterNamePokemon, setSearchName,
 } from "../../redux/reducers/dataPokemonSlice";
-import { useGetListPokemonMainQuery } from "../../redux/reducers/apiFetch";
+import { useGetListPokemonMainQuery } from "../../redux/reducers/apiPokeFetch";
 import { useForm } from "react-hook-form";
 import { useSelector } from "react-redux";
 import { getFilterDataPokemon, getSearchPokemon } from "../../redux/selectors/dataPokemonSelector";

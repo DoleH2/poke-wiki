@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { useGetDetailPokemonQuery } from "../../redux/reducers/apiFetch";
+import { useGetDetailPokemonQuery } from "../../redux/reducers/apiPokeFetch";
 import '../../scss/optionsearchStyle.scss'
 import { changeRouter } from "../../utils/handleRouter";
 import LoadCircle from "../utilsComponent/LoadCircle";
